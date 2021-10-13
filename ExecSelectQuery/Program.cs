@@ -12,7 +12,9 @@ namespace MySQLTest
     {
         public static void Main()
         {
-            string connStr = "server=192.168.0.13;user=dky;database=test;port=3306;password=123";
+            string connStr = "server=10.0.4.94;user=dky;database=test;port=3306;password=1qaz2wsx";
+            //string connStr = "server=192.168.0.13;user=dky;database=test;port=3306;password=123";
+            
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {

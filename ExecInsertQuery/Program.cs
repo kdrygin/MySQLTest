@@ -1,10 +1,8 @@
-﻿// MySQL Connection Test
-// https://dev.mysql.com/doc/connector-net/en/connector-net-programming-getschema.html
-//
+﻿// MySQL Insert Query Test
+// https://dev.mysql.com/doc/connector-net/en/connector-net-tutorials-sql-command.html
 
 using System;
 using System.Data;
-using System.Text;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -12,7 +10,7 @@ namespace MySQLTest
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             string connStr = "server=10.0.4.94;user=dky;database=test;port=3306;password=1qaz2wsx";
             //string connStr = "server=192.168.0.13;user=dky;database=test;port=3306;password=123";
@@ -23,24 +21,17 @@ namespace MySQLTest
                 Console.WriteLine("Connecting to MySQL...");
                 conn.Open();
 
-                //DataTable table = conn.GetSchema("MetaDataCollections");
-                DataTable table = conn.GetSchema("Tables");
-
-                foreach (System.Data.DataRow row in table.Rows)
-                {
-                    foreach (System.Data.DataColumn col in table.Columns)
-                    {
-                        Console.WriteLine("{0} = {1}", col.ColumnName, row[col]);
-                    }
-                    Console.WriteLine("============================");
-                }
-
-                conn.Close();
+                string sql = "INSERT INTO `authors` (`id`, `first_name`, `last_name`, `email`, `birthdate`, `added`) " +
+                             "VALUES (0, 'Test', 'Test', 'test1@test.org', '2000-01-01', '2020-01-01 00:00:00');";
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
+
+            conn.Close();
             Console.WriteLine("Done.");
         }
     }
