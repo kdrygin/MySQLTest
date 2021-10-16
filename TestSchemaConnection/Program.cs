@@ -5,6 +5,8 @@
 using System;
 using System.Data;
 using System.Text;
+using System.Configuration;
+
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
@@ -14,10 +16,12 @@ namespace MySQLTest
     {
         static void Main(string[] args)
         {
-            string connStr = "server=10.0.4.94;user=dky;database=test;port=3306;password=1qaz2wsx";
-            //string connStr = "server=192.168.0.13;user=dky;database=test;port=3306;password=123";
-            
+            // Connection string format
+            // "server=SERVER_IP_ADDRESS;user=USER;database=SCHEMA;port=3306;password=USER_PASSWORD";
+
+            string connStr = ConfigurationManager.AppSettings["DBConnectionString"].ToString();
             MySqlConnection conn = new MySqlConnection(connStr);
+
             try
             {
                 Console.WriteLine("Connecting to MySQL...");
